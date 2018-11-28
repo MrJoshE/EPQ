@@ -1,26 +1,11 @@
-generate = function(){
-
-  var emptyString = "";
-  var alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-  while (emptyString.length < this.len) {
-    emptyString += alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
-  return emptyString;
-
-
-
-}
-
-
-
+xxx
 class DNA{
   constructor(){
     this.len = target.length
     //this.initial = Math.random().toString(36).substring(2, this.len) + Math.random().toString(36).substring(2, this.len);
 
     this.initial = "";
-    var alphabet = "abcdefghijklmnopqrstuvwxyz";
+    var alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     while (this.initial.length < this.len) {
       this.initial += alphabet[Math.floor(Math.random() * alphabet.length)];
@@ -64,48 +49,51 @@ class DNA{
 
   }
 
+
+
+
   mutate(rate){
 
-    //Mutation rate = 0.05
+
+    this.mutated = false
+    var rand = Math.round(Math.random() * rate + 1)
+    this.rand = rand
 
 
-
-    let rand = random(0,100)
-    rand = Math.floor(rand)
-
-
-
-    if (rand < rate){
+    if (rand <= rate){
+      this.mutated = true
+      this.preM = this.initial
       // let str = this.initial
       // let og = str.slice(Math.floor((Math.random() * this.initial.length) + 1),1)
       // this.initial.replace(og,Math.random().toString(36).substring(2, 1) + Math.random().toString(36).substring(2, 1))
-      this.initial = "";
-      var alphabet = "abcdefghijklmnopqrstuvwxyz";
+      var alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-      while (this.initial.length < this.len) {
-        this.initial += alphabet[Math.floor(Math.random() * alphabet.length)];
+      let newLetter = ""
+      let oldLetter = ""
+      while (newLetter == oldLetter){
+
+        var chosen = Math.round(Math.random() * alphabet.length);
+        var old = Math.round(Math.random() * (this.initial.length - 1));
+
+        newLetter = alphabet[chosen];
+        oldLetter = this.initial[old];
+
       }
+      this.oldLetter = oldLetter
+      this.oldLetter_i = old
+      this.newLetter = newLetter
+
+      var string = this.initial.replace(oldLetter,newLetter)
+      this.initial = string;
+
+
+      this.postM = this.initial
     }
+
 
   }
 
 
-  // static breed(a,b){
-  //
-  //   let child = new DNA();
-  //   let a_string = a.initial;
-  //   let b_string = b.initial;
-  //
-  //   let half_a = a_string.slice(0,a.initial.length/2);
-  //   let half_b = b_string.slice(b.initial.length/2,b.length);
-  //   // console.log(half_a)
-  //   // console.log(half_b)
-  //   child.initial = half_a + half_b;
-  //   //console.log(child.initial)
-  //   return(child);
-  //
-  //
-  // }
 
   static breed(a,b){
 
