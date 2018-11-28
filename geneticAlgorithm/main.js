@@ -1,6 +1,6 @@
 
-var target = "Josh";
-var populationSize = 100;
+var target = "A very long sentence with loads of spaces";
+var populationSize = 200;
 var population = [];
 var word;
 var found = false;
@@ -8,6 +8,7 @@ var generation = 0;
 var fitnesses = []
 var mutationRate = 40;
 function setup() {
+
 
 
 
@@ -43,25 +44,7 @@ function setup() {
     population.push(child)
   }
 
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -69,32 +52,30 @@ function setup() {
 
 function draw() {
 
+
+  fitnesses = []
+  for(let _dna = 0; _dna < populationSize; _dna++){
+    fitnesses.push(population[_dna].fitness_calculator())
+  }
+
+
   for(let d = 0; d < populationSize; d++){
     //console.log(population)
-    if (population[d].initial == target){
-      let word = population[d].initial;
+    if (population[d].initial == target || population[d].fitness == 1){
+      var word = population[d].initial;
+      var winner = population[d];
       found = true
     }
   }
 
   if(found == false){
 
-    fitnesses = []
-    for(let _dna = 0; _dna < populationSize; _dna++){
-      fitnesses.push(population[_dna].fitness_calculator())
-    }
-
-    //console.table(population)
-
-    //Breeding
     var top_DNA = null;
     var second_DNA = null;
 
     top_DNA = DNA.bestDNA(fitnesses,population);
 
     second_DNA = DNA.secondDNA(fitnesses,population)
-
-    //console.table(population)
 
     population = [];
     generation += 1;
@@ -105,17 +86,14 @@ function draw() {
       population.push(child)
     }
 
-    console.table(population)
-
-    //console.log(found)
-    //console.log(generation)
-
-
+    console.log(top_DNA)
 
 
 
   } else if (found == true){
+    console.log(winner)
     console.log("Found your word = " + word)
+    exit()
   } else{
     console.log("Found is not defined.")
   }
