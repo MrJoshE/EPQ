@@ -1,4 +1,4 @@
-xxx
+xw
 class DNA{
   constructor(){
     this.len = target.length
