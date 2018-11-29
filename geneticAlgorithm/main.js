@@ -1,6 +1,5 @@
-
 var target = "A very long sentence with loads of spaces";
-var populationSize = 200;
+var populationSize = 10 * target.length;
 var population = [];
 var word;
 var found = false;
