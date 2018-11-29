@@ -1,3 +1,9 @@
+generate = function(){
+  rand = random(0,100);
+  return rand;
+}
+
+
 
 class DNA{
   constructor(){
@@ -56,11 +62,19 @@ class DNA{
 
 
     this.mutated = false
-    var rand = Math.round(Math.random() * rate + 1)
+
+
+
+    var rand = generate()
+    //var rand = Math.floor(Math.random() * 100)
+    //console.log(rand)
+    //var rand = Math.floor(Math.random() * 100)
     this.rand = rand
 
 
+
     if (rand <= rate){
+
       this.mutated = true
       this.preM = this.initial
       // let str = this.initial
@@ -88,11 +102,11 @@ class DNA{
 
 
       this.postM = this.initial
+
     }
 
 
   }
-
 
 
   static breed(a,b){
@@ -116,6 +130,8 @@ class DNA{
     let three_a = a_string.slice(randomCrossStart2,b.len)
     // console.log(half_a)
     // console.log(half_b)
+
+    //  x(a_string) + y(b_string) + remaining(a_string)
     child.initial = one_a + two_b + three_a;
     //console.log(child.initial)
     return(child);
